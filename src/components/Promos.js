@@ -1,55 +1,75 @@
-import React from 'react';
-import pizza from '../pizza.jpg';        // Your local pizza promo image
-import burger from '../burger.jpg';        // Your local burger promo image
-import shawarma from '../shawarma.jpg';    // Your local shawarma promo image
+import React, { useState } from 'react';
+import FadeInSection from './FadeInSection';
+import PromoModal from './PromoModal';
+import pizza from '../pizza.jpg';
+import burger from '../burger.jpg';
+import shawarma from '../shawarma.jpg';
 
-const Promos = () => (
-  <section id="promos" className="py-32 px-8 bg-latte-light">
-    <h2 className="text-4xl md:text-5xl font-serif text-coffee-dark mb-16 text-center">Special Promotions</h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
-      {/* Tuesday: BOGO Pizza */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <img 
-          src={pizza} 
-          alt="Tuesday BOGO Pizza Promotion" 
-          className="w-full h-80 object-cover" 
-        />
-        <div className="p-8 text-center">
-          <h3 className="text-2xl font-serif mb-4 text-coffee-medium">Tuesday Pizza Nights</h3>
-          <p className="text-lg">Buy One Gourmet Pizza,<br />Get One Free!</p>
-          <p className="mt-4 text-sm text-gray-600">Every Tuesday – Gather and share in our cozy vibe</p>
-        </div>
+const promos = [
+  {
+    title: 'Tuesday Pizza Promo',
+    desc: 'Buy One Gourmet Pizza, Get One Free!',
+    day: 'Every Tuesday – Gather and share in our cozy vibe',
+    img: pizza,
+  },
+  {
+    title: 'Thursday Burger Deals',
+    desc: 'Juicy Burgers with Special Combos or Buy One Get One Free!',
+    day: 'Every Thursday – Fuel up for the weekend',
+    img: burger,
+  },
+  {
+    title: 'Sunday Shawarma Special',
+    desc: 'Flavorful Shawarmas – Perfect After Church!',
+    day: 'Every Sunday – Relax with family & friends',
+    img: shawarma,
+  },
+];
+
+const Promos = () => {
+  const [selectedPromo, setSelectedPromo] = useState(null);
+
+  return (
+    <section id="promos" className="py-28 md:py-32 px-6 md:px-8 bg-latte-light dark:bg-gray-800">
+      <FadeInSection>
+        <h2 className="text-4xl md:text-5xl font-serif text-coffee-dark dark:text-coffee-light mb-12 md:mb-16 text-center">
+          Special Promotions
+        </h2>
+      </FadeInSection>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 max-w-7xl mx-auto">
+        {promos.map((promo, index) => (
+          <FadeInSection key={promo.title} delay={index * 0.15}>
+            <div
+              onClick={() => setSelectedPromo(promo)}
+              className="group bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1"
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={promo.img}
+                  alt={promo.title}
+                  className="w-full h-72 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="p-7 md:p-8 text-center">
+                <h3 className="text-xl md:text-2xl font-serif mb-3 text-coffee-medium dark:text-coffee-light group-hover:text-coffee-dark dark:group-hover:text-white transition-colors">
+                  {promo.title}
+                </h3>
+                <p className="text-base md:text-lg mb-2">{promo.desc}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{promo.day}</p>
+              </div>
+            </div>
+          </FadeInSection>
+        ))}
       </div>
 
-      {/* Thursday: Burgers */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <img 
-          src={burger} 
-          alt="Thursday Burger Special" 
-          className="w-full h-80 object-cover" 
-        />
-        <div className="p-8 text-center">
-          <h3 className="text-2xl font-serif mb-4 text-coffee-medium">Thursday Burger Deals</h3>
-          <p className="text-lg">Juicy Burgers with Special Combos<br />or Buy One Get One Free!</p>
-          <p className="mt-4 text-sm text-gray-600">Every Thursday – Fuel up for the weekend</p>
-        </div>
-      </div>
-
-      {/* Sunday: Shawarmas After Church */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <img 
-          src={shawarma} 
-          alt="Sunday Shawarma Special" 
-          className="w-full h-80 object-cover" 
-        />
-        <div className="p-8 text-center">
-          <h3 className="text-2xl font-serif mb-4 text-coffee-medium">Sunday Shawarma Special</h3>
-          <p className="text-lg">Flavorful Shawarmas<br />Perfect After Church!</p>
-          <p className="mt-4 text-sm text-gray-600">Every Sunday – Relax with family & friends</p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
+      <PromoModal
+        isOpen={!!selectedPromo}
+        onClose={() => setSelectedPromo(null)}
+        promo={selectedPromo}
+      />
+    </section>
+  );
+};
 
 export default Promos;
