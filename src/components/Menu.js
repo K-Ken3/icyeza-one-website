@@ -11,7 +11,7 @@ import shawarmaImg from '../assets/shawarma.jpg';
 
 const highlightedDrinks = [
   { name: 'Signature Latte', price: 'RWF 2,500', desc: 'Beautiful art, emotional support in every sip', img: latteImg },
-  { name: 'Mango Iced Tea',   price: 'RWF 3,000', desc: 'Refreshing & fruity – perfect for warm days', img: icedTeaImg },
+  { name: 'Mango Smoothie',   price: 'RWF 3,000', desc: 'Refreshing & fruity – perfect for warm days', img: icedTeaImg },
   { name: 'Classic Espresso', price: 'RWF 2,500', desc: 'Premium beans, expertly brewed', img: espressoImg },
 ];
 
