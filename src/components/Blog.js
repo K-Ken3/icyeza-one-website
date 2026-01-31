@@ -36,7 +36,7 @@ const Blog = () => (
                 {post.title}
               </h3>
               <p className="mb-5 text-gray-700 dark:text-gray-300">{post.excerpt}</p>
-              <a href="#" className="text-coffee-medium dark:text-coffee-light hover:underline font-medium">
+              <a href="/blog/post-slug" className="text-coffee-medium dark:text-coffee-light hover:underline font-medium">
                 Read More →
               </a>
             </div>
